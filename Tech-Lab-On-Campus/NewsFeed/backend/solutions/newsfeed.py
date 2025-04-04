@@ -33,7 +33,11 @@ def get_featured_news() -> Article | None:
     # can be this or some criteria to decide which is featured.
     all_news = get_all_news()
 
-    return sorted(all_news, lambda article: article.publish_date, reverse=True)[0] if all_news else None
+    return (
+        sorted(all_news, lambda article: article.publish_date, reverse=True)[0]
+        if all_news
+        else None
+    )
 
 
 def _format_as_article(data: dict) -> Article:
