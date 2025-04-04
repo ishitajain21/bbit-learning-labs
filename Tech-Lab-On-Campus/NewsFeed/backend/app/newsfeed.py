@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from datetime import datetime
-from app.utils.redis import REDIS_CLIENT
+from app.utils.redis import REDIS_CLIENT as RedisClient
 
 
 # POST: pay , PUT: phone number
@@ -33,7 +33,6 @@ def format_article(article: dict) -> Article:
 def get_all_news() -> list[Article]:
     """Get all news articles from the datastore."""
     # 1. Use Redis client to fetch all articles
-    RedisClient = RedisClient()
     entrie = RedisClient.get_entry("all_articles")
     # 2. Format the data into articles
     entries = []
@@ -47,7 +46,6 @@ def get_all_news() -> list[Article]:
 def get_featured_news() -> Article | None:
     """Get the featured news article from the datastore."""
     # 1. Get all the articles
-    RedisClient = RedisClient()
     entrie = RedisClient.get_entry("all_articles")
     l = []
     for i in entrie:
